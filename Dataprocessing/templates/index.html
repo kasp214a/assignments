@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CarData</title>
+</head>
+<body>
+
+    <h1>Welcom to the Self Driving Car Database</h1>
+    <p>this is the data for the Carmodels</p>
+    <p>Brand, Licensplate, Owner name </p>
+
+    {% for cars in showCar %}
+        <li>{{ cars.brand}} - {{ cars.licenseplate}} - {{ cars.ownername}}</li>
+    {% endfor %}
+
+    <p>this is the data for the GPS</p>
+    <p>Longitude, latitudem, timestamp, datestamp, Licensplate </p>
+
+    {% for gps in showGps %}
+        <li>{{ gps.longitude}} - {{ gps.latitude}} - {{ gps.time}} - {{ gps.date}} - {{ gps.licensplate}}</li>
+    {% endfor %}
+
+    <p>this is the data for the Eyetracking</p>
+    <p>Blinks, Yawns, Head tilt, Eye Focus, Licensplate </p>
+
+    {% for eye in showEye %}
+        <li>{{ eye.blinks }} - {{ eye.yawns }} - {{ eye.headtilt }} - {{ eye.eyefocus }} - {{ eye.licensplate }}</li>
+    {% endfor %}
+
+    <p>this is the data for the Alertness</p>
+    <p>Blinks score, Yawns score, Head tilt score, Eye Focus score, Licensplate </p>
+
+    {% for alert in showAlert %}
+        <li>{{ alert.blinkscore }} - {{ alert.yawnscore }} - {{ alert.headtiltscore }} - {{ alert.eyefocusscore }} - {{ alert.licensplate }}</li>
+    {% endfor %}
+
+    <p>this is the data for the Alertsent</p>
+    <p>Combined Score, Report sent, Licensplate</p>
+
+    {% for sent in showSent %}
+        <li>{{ sent.combinedscore }} - {{ sent.reportsent }} - {{ sent.licensplate }}</li>
+    {% endfor %}
+
+</body>
+</html>
