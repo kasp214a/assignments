@@ -1,0 +1,219 @@
+
+Motorsetup.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  00000182  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000012e  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000182  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001b4  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000058  00000000  00000000  000001f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000088c  00000000  00000000  00000248  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000714  00000000  00000000  00000ad4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000310  00000000  00000000  000011e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000078  00000000  00000000  000014f8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003d8  00000000  00000000  00001570  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000c9  00000000  00000000  00001948  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000038  00000000  00000000  00001a11  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 40 00 	call	0x80	; 0x80 <main>
+  78:	0c 94 95 00 	jmp	0x12a	; 0x12a <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <main>:
+
+
+
+int main(void)
+{
+	setupMotor(1);
+  80:	81 e0       	ldi	r24, 0x01	; 1
+  82:	90 e0       	ldi	r25, 0x00	; 0
+  84:	0e 94 51 00 	call	0xa2	; 0xa2 <setupMotor>
+	setupBUTonPORTB(0);  //sets PORTB.n to be an input Button connected to ground
+  88:	80 e0       	ldi	r24, 0x00	; 0
+  8a:	0e 94 76 00 	call	0xec	; 0xec <setupBUTonPORTB>
+    /* Replace with your application code */
+    while (1) 
+    {
+		if (getBUT(0)) spinMotor1(1);
+  8e:	80 e0       	ldi	r24, 0x00	; 0
+  90:	0e 94 88 00 	call	0x110	; 0x110 <getBUT>
+  94:	88 23       	and	r24, r24
+  96:	d9 f3       	breq	.-10     	; 0x8e <main+0xe>
+  98:	81 e0       	ldi	r24, 0x01	; 1
+  9a:	90 e0       	ldi	r25, 0x00	; 0
+  9c:	0e 94 5c 00 	call	0xb8	; 0xb8 <spinMotor1>
+  a0:	f6 cf       	rjmp	.-20     	; 0x8e <main+0xe>
+
+000000a2 <setupMotor>:
+#include <avr/io.h>
+#include <util/delay.h>
+
+void setupMotor (unsigned int n) // sets PORTD.n to be an output
+{
+	DDRD |= (1 << n);
+  a2:	9a b1       	in	r25, 0x0a	; 10
+  a4:	21 e0       	ldi	r18, 0x01	; 1
+  a6:	30 e0       	ldi	r19, 0x00	; 0
+  a8:	02 c0       	rjmp	.+4      	; 0xae <setupMotor+0xc>
+  aa:	22 0f       	add	r18, r18
+  ac:	33 1f       	adc	r19, r19
+  ae:	8a 95       	dec	r24
+  b0:	e2 f7       	brpl	.-8      	; 0xaa <setupMotor+0x8>
+  b2:	29 2b       	or	r18, r25
+  b4:	2a b9       	out	0x0a, r18	; 10
+  b6:	08 95       	ret
+
+000000b8 <spinMotor1>:
+
+
+
+void spinMotor1 (unsigned int n) // sets the output value of pin PORTD.n High 
+{
+	PORTD |= (1 << n);
+  b8:	4b b1       	in	r20, 0x0b	; 11
+  ba:	21 e0       	ldi	r18, 0x01	; 1
+  bc:	30 e0       	ldi	r19, 0x00	; 0
+  be:	b9 01       	movw	r22, r18
+  c0:	02 c0       	rjmp	.+4      	; 0xc6 <spinMotor1+0xe>
+  c2:	66 0f       	add	r22, r22
+  c4:	77 1f       	adc	r23, r23
+  c6:	8a 95       	dec	r24
+  c8:	e2 f7       	brpl	.-8      	; 0xc2 <spinMotor1+0xa>
+  ca:	cb 01       	movw	r24, r22
+  cc:	46 2b       	or	r20, r22
+  ce:	4b b9       	out	0x0b, r20	; 11
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  d0:	7f ef       	ldi	r23, 0xFF	; 255
+  d2:	23 ed       	ldi	r18, 0xD3	; 211
+  d4:	30 e3       	ldi	r19, 0x30	; 48
+  d6:	71 50       	subi	r23, 0x01	; 1
+  d8:	20 40       	sbci	r18, 0x00	; 0
+  da:	30 40       	sbci	r19, 0x00	; 0
+  dc:	e1 f7       	brne	.-8      	; 0xd6 <spinMotor1+0x1e>
+  de:	00 c0       	rjmp	.+0      	; 0xe0 <spinMotor1+0x28>
+  e0:	00 00       	nop
+	_delay_ms(1000);
+	PORTD &= ~(1 << n);
+  e2:	9b b1       	in	r25, 0x0b	; 11
+  e4:	80 95       	com	r24
+  e6:	89 23       	and	r24, r25
+  e8:	8b b9       	out	0x0b, r24	; 11
+  ea:	08 95       	ret
+
+000000ec <setupBUTonPORTB>:
+}
+
+void setupBUTonPORTB(unsigned char n)  //sets PORTB.n to be an input Button connected to ground
+{
+	DDRB &= ~(1<<n);
+  ec:	44 b1       	in	r20, 0x04	; 4
+  ee:	21 e0       	ldi	r18, 0x01	; 1
+  f0:	30 e0       	ldi	r19, 0x00	; 0
+  f2:	b9 01       	movw	r22, r18
+  f4:	02 c0       	rjmp	.+4      	; 0xfa <setupBUTonPORTB+0xe>
+  f6:	66 0f       	add	r22, r22
+  f8:	77 1f       	adc	r23, r23
+  fa:	8a 95       	dec	r24
+  fc:	e2 f7       	brpl	.-8      	; 0xf6 <setupBUTonPORTB+0xa>
+  fe:	cb 01       	movw	r24, r22
+ 100:	96 2f       	mov	r25, r22
+ 102:	90 95       	com	r25
+ 104:	49 23       	and	r20, r25
+ 106:	44 b9       	out	0x04, r20	; 4
+	PORTB |= (1<<n);
+ 108:	95 b1       	in	r25, 0x05	; 5
+ 10a:	89 2b       	or	r24, r25
+ 10c:	85 b9       	out	0x05, r24	; 5
+ 10e:	08 95       	ret
+
+00000110 <getBUT>:
+}
+
+
+unsigned char getBUT(unsigned char n)  //  gets the immediate status of Button n....true for being pressed
+{
+	if (0 == (PINB & (1<<n)))
+ 110:	23 b1       	in	r18, 0x03	; 3
+ 112:	30 e0       	ldi	r19, 0x00	; 0
+ 114:	02 c0       	rjmp	.+4      	; 0x11a <getBUT+0xa>
+ 116:	35 95       	asr	r19
+ 118:	27 95       	ror	r18
+ 11a:	8a 95       	dec	r24
+ 11c:	e2 f7       	brpl	.-8      	; 0x116 <getBUT+0x6>
+ 11e:	20 fd       	sbrc	r18, 0
+ 120:	02 c0       	rjmp	.+4      	; 0x126 <getBUT+0x16>
+	{
+		return 1;
+ 122:	81 e0       	ldi	r24, 0x01	; 1
+ 124:	08 95       	ret
+	}
+	else
+	{
+		return 0;
+ 126:	80 e0       	ldi	r24, 0x00	; 0
+	}
+ 128:	08 95       	ret
+
+0000012a <_exit>:
+ 12a:	f8 94       	cli
+
+0000012c <__stop_program>:
+ 12c:	ff cf       	rjmp	.-2      	; 0x12c <__stop_program>
